@@ -38,7 +38,7 @@ Here're some of the project's best features:
 
 <h2>🛠️ Installation Steps:</h2>
 
-<p>1. Simply download the latest release and install it on your smartphone</p>
+<p>1. Download the <a href="https://github.com/dcruzparedes/ExTra-Expenses-Tracker/releases/latest">latest release</a> and install it on your smartphone.</p>
 
   
   
