@@ -8,12 +8,14 @@ import androidx.room.RoomDatabase
 @Database(
     entities = [Expense::class,
         Category::class,
-        ExpenseCategoryCrossRef::class], version = 2, exportSchema = false
+        ExpenseCategoryCrossRef::class,
+        Jornada::class], version = 3, exportSchema = false
 )
 abstract class ExpenseDatabase : RoomDatabase() {
 
     abstract fun expenseDao(): ExpenseDao
     abstract fun categoryDao(): CategoryDao
+    abstract fun jornadaDao(): JornadaDao
 
     // Companion object implements singleton pattern
     companion object {
@@ -26,7 +28,8 @@ abstract class ExpenseDatabase : RoomDatabase() {
                     context.applicationContext,
                     ExpenseDatabase::class.java,
                     "expenses_database",
-                ).build()
+                ).fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }

@@ -15,6 +15,8 @@
     <string name="stats_nav_button_text">Estadísticas</string>
     <string name="settings_nav_button_text">Ajustes</string>
     <string name="delete_selected_button_text">Eliminar Seleccionados</string>
+    <string name="selected_count_text">%d seleccionados</string>
+    <string name="read_only_session_message">Esta jornada está cerrada y es de solo lectura. Sus gastos ya no se pueden editar.</string>
     <string name="edit_expense_name_text">Nombre del Gasto</string>
     <string name="save_changes_edit_text">Guardar Cambios</string>
     <string name="delete_expense_edit_text">Borrar Gasto</string>
@@ -32,7 +34,7 @@
     <string name="sort_by_amount_descending_selection_text">Monto (Descendiente)</string>
     <string name="filter_by_category_selection_text">Filtrar por Categoría</string>
     <string name="all_categories_selection_text">Todas las Categorías</string>
-    <string name="no_expenses_found">No hay gastos para esta categoría</string>
+    <string name="no_expenses_found">Para empezar agrega un gasto</string>
     <string name="spending_overview_title_text">Resumen de Gastos</string>
     <string name="total_spent_title_text">Total Gastado</string>
     <string name="category_breakdown_title_text">Desglose de Categorías</string>
@@ -56,4 +58,24 @@
     <string name="category_updated_success">Categoría actualizada exitosamente</string>
     <string name="category_deleted_success">Categoría eliminada exitosamente</string>
     <string name="ok_button">OK</string>
+    <string name="history_nav_button_text">Historial</string>
+    <string name="close_session_button_text">Cerrar Jornada</string>
+    <string name="close_session_dialog_title">Cerrar Jornada</string>
+    <string name="close_session_dialog_message">Introduce un nombre para esta jornada. Todos los gastos actuales se archivarán y esta jornada será de solo lectura.</string>
+    <string name="session_name_hint">Nombre de la Jornada</string>
+    <string name="create_session_from_selected_description">Crear jornada con los seleccionados</string>
+    <string name="create_session_selected_dialog_title">Crear Jornada con Seleccionados</string>
+    <string name="create_session_selected_dialog_message">Introduce un nombre para esta jornada. Los gastos seleccionados se archivarán en ella y esta jornada será de solo lectura.</string>
+    <string name="error_session_name_empty">El nombre de la jornada no puede estar vacío</string>
+    <string name="error_session_empty">No se puede crear una jornada vacía: no hay gastos para archivar</string>
+    <string name="history_title">Historial de Jornadas</string>
+    <string name="no_history_found">No hay historial</string>
+    <string name="jornada_details_title">Detalles de la Jornada</string>
+    <string name="total_amount_text">Total: %1$s %2$.2f</string>
+    <string name="currency_amount_format">%1$s %2$.2f</string>
+    <string name="delete_jornada_dialog_title">Eliminar Jornada</string>
+    <string name="delete_jornada_dialog_message">¿Estás seguro de que quieres eliminar esta jornada? Los gastos en su interior NO se eliminarán, pero ya no estarán agrupados.</string>
+    <string name="delete_jornada_success">Jornada eliminada con éxito</string>
+    <string name="delete_jornadas_dialog_title">Eliminar Jornadas</string>
+    <string name="delete_jornadas_dialog_message">¿Estás seguro de que quieres eliminar las jornadas seleccionadas? Los gastos en su interior NO se eliminarán, solamente dejarán de estar agrupados.</string>
 </resources>

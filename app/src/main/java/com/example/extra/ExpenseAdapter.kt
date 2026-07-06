@@ -10,8 +10,9 @@ import com.example.extra.databinding.ItemExpenseBinding
 
 class ExpenseAdapter(
     private val onItemClick: (ExpenseWithCategories) -> Unit,
-    private val onSelectionChanged: (Int) -> Unit,
-    private var currencySymbol: String = "$"
+    private val onSelectionChanged: (Int) -> Unit = {},
+    private var currencySymbol: String = "$",
+    private val isReadOnly: Boolean = false
 ) : ListAdapter<ExpenseWithCategories, ExpenseAdapter.ExpenseViewHolder>(DiffCallback) {
 
     fun updateCurrency(newSymbol: String) {
@@ -56,18 +57,20 @@ class ExpenseAdapter(
             }
 
             binding.root.setOnLongClickListener {
-                if (!isSelectionMode) {
+                if (!isReadOnly && !isSelectionMode) {
                     isSelectionMode = true
                     toggleSelection(item.expense.id)
                 }
-                true
+                !isReadOnly
             }
 
             binding.root.setOnClickListener {
-                if (isSelectionMode) {
-                    toggleSelection(item.expense.id)
-                } else {
-                    onItemClick(item)
+                if (!isReadOnly) {
+                    if (isSelectionMode) {
+                        toggleSelection(item.expense.id)
+                    } else {
+                        onItemClick(item)
+                    }
                 }
             }
         }

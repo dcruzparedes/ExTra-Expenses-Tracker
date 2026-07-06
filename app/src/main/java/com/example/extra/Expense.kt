@@ -11,7 +11,18 @@ data class Expense (
     val name: String,
     val amount: Double,
     val date: String,
-    val createdAt: Long = System.currentTimeMillis()
+    val createdAt: Long = System.currentTimeMillis(),
+    val jornadaId: Int? = null
+)
+
+// Jornada entity, representing a closed session of expenses
+@Entity(tableName = "jornadas")
+data class Jornada (
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    val name: String,
+    val date: Long = System.currentTimeMillis(),
+    val totalAmount: Double
 )
 
 // Category entity, representing a category of expenses

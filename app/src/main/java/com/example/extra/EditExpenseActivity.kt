@@ -153,7 +153,8 @@ class EditExpenseActivity : AppCompatActivity() {
                     name = name,
                     amount = amount!!,
                     date = date,
-                    createdAt = createdAt
+                    createdAt = createdAt,
+                    jornadaId = originalExpense?.jornadaId
                 )
 
                 val selectedCategory = allCategories.find { it.name == selectedCategoryName }

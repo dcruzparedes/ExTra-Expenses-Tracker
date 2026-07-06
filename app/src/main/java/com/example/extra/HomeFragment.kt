@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.extra.databinding.FragmentHomeBinding
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -105,7 +106,8 @@ class HomeFragment : Fragment() {
             onSelectionChanged = { count ->
                 if (count > 0) {
                     binding.selectionContainer.visibility = View.VISIBLE
-                    
+                    binding.tvSelectedCount.text = getString(R.string.selected_count_text, count)
+
                     // Update icon based on whether all visible items are selected or not
                     val isAllSelected = count == adapter.currentList.size
                     binding.btnSelectAll.setIconResource(
@@ -127,6 +129,14 @@ class HomeFragment : Fragment() {
             startActivity(Intent(requireContext(), AddExpenseActivity::class.java))
         }
 
+        binding.btnCloseSession.setOnClickListener {
+            showCreateSessionDialog(null)
+        }
+
+        binding.btnCreateSessionFromSelected.setOnClickListener {
+            showCreateSessionDialog(adapter.getSelectedIds())
+        }
+
         binding.btnDeleteSelected.setOnClickListener {
             val selectedIds = adapter.getSelectedIds()
             viewLifecycleOwner.lifecycleScope.launch {
@@ -145,6 +155,99 @@ class HomeFragment : Fragment() {
             } else {
                 adapter.selectAll()
             }
+        }
+    }
+
+    /**
+     * Shows the create-session dialog.
+     * @param expenseIds when null, archives ALL currently-open expenses (bulk "Close Session").
+     *                   when non-null, archives ONLY those expense ids into the new session.
+     */
+    private fun showCreateSessionDialog(expenseIds: List<Int>?) {
+        val container = android.widget.FrameLayout(requireContext())
+        val params = android.widget.FrameLayout.LayoutParams(
+            android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+            android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        val margin = (16 * resources.displayMetrics.density).toInt()
+        params.setMargins(margin, margin / 2, margin, 0)
+
+        val til = com.google.android.material.textfield.TextInputLayout(requireContext())
+        til.layoutParams = params
+        til.hint = getString(R.string.session_name_hint)
+        val input = com.google.android.material.textfield.TextInputEditText(til.context)
+        til.addView(input)
+        container.addView(til)
+
+        // Use wording specific to whether we archive ALL open expenses or only the selected ones.
+        val titleRes = if (expenseIds == null) R.string.close_session_dialog_title
+            else R.string.create_session_selected_dialog_title
+        val messageRes = if (expenseIds == null) R.string.close_session_dialog_message
+            else R.string.create_session_selected_dialog_message
+
+        val dialog = com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
+            .setTitle(titleRes)
+            .setMessage(messageRes)
+            .setView(container)
+            // Pass null so the dialog does not auto-dismiss; we validate on click instead.
+            .setPositiveButton(R.string.save_button_text, null)
+            .setNegativeButton(R.string.cancel_button_text, null)
+            .create()
+
+        dialog.setOnShowListener {
+            dialog.getButton(android.content.DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+                val name = input.text?.toString()?.trim().orEmpty()
+                if (name.isEmpty()) {
+                    til.error = getString(R.string.error_session_name_empty)
+                    return@setOnClickListener
+                }
+                til.error = null
+                createSession(name, expenseIds, dialog)
+            }
+        }
+        dialog.show()
+    }
+
+    private fun createSession(
+        name: String,
+        expenseIds: List<Int>?,
+        dialog: androidx.appcompat.app.AlertDialog
+    ) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val db = ExpenseDatabase.getDatabase(requireContext())
+
+            if (expenseIds == null) {
+                // Bulk close-all: total from ALL active expenses, not just the filtered ones.
+                val expenses = db.expenseDao().getAllExpenses().first()
+                if (expenses.isEmpty()) {
+                    android.widget.Toast.makeText(
+                        requireContext(),
+                        R.string.error_session_empty,
+                        android.widget.Toast.LENGTH_SHORT
+                    ).show()
+                    return@launch
+                }
+                val totalAmount = expenses.sumOf { it.amount }
+                val jornadaId = db.jornadaDao().insertJornada(Jornada(name = name, totalAmount = totalAmount))
+                db.expenseDao().closeCurrentSession(jornadaId.toInt())
+            } else {
+                if (expenseIds.isEmpty()) {
+                    android.widget.Toast.makeText(
+                        requireContext(),
+                        R.string.error_session_empty,
+                        android.widget.Toast.LENGTH_SHORT
+                    ).show()
+                    return@launch
+                }
+                val totalAmount = adapter.currentList
+                    .filter { expenseIds.contains(it.expense.id) }
+                    .sumOf { it.expense.amount }
+                val jornadaId = db.jornadaDao().insertJornada(Jornada(name = name, totalAmount = totalAmount))
+                db.expenseDao().assignExpensesToJornada(expenseIds, jornadaId.toInt())
+                adapter.clearSelection()
+            }
+
+            dialog.dismiss()
         }
     }
 

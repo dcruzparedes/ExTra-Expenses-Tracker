@@ -9,6 +9,10 @@
         android:icon="@android:drawable/ic_menu_sort_by_size"
         android:title="@string/stats_nav_button_text" />
     <item
+        android:id="@+id/nav_history"
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:title="@string/history_nav_button_text" />
+    <item
         android:id="@+id/nav_settings"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="@string/settings_nav_button_text" />

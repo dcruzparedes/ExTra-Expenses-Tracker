@@ -16,6 +16,8 @@
     <string name="stats_nav_button_text">Stats</string>
     <string name="settings_nav_button_text">Settings</string>
     <string name="delete_selected_button_text">Delete Selected</string>
+    <string name="selected_count_text">%d selected</string>
+    <string name="read_only_session_message">This session is closed and read-only. Its expenses can no longer be edited.</string>
     <string name="edit_expense_name_text">Expense Name</string>
     <string name="save_changes_edit_text">Save Changes</string>
     <string name="delete_expense_edit_text">Delete Expense</string>
@@ -33,7 +35,7 @@
     <string name="sort_by_amount_descending_selection_text">Amount (Descending)</string>
     <string name="filter_by_category_selection_text">Filter by Category</string>
     <string name="all_categories_selection_text">All Categories</string>
-    <string name="no_expenses_found">There are no expenses for this category</string>
+    <string name="no_expenses_found">To start add an expense</string>
     <string name="spending_overview_title_text">Spending Overview</string>
     <string name="total_spent_title_text">Total Spent</string>
     <string name="category_breakdown_title_text">Category Breakdown</string>
@@ -57,6 +59,26 @@
     <string name="category_updated_success">Category updated successfully</string>
     <string name="category_deleted_success">Category deleted successfully</string>
     <string name="ok_button">OK</string>
+    <string name="history_nav_button_text">History</string>
+    <string name="close_session_button_text">Close Session</string>
+    <string name="close_session_dialog_title">Close Session</string>
+    <string name="close_session_dialog_message">Enter a name for this session. All current expenses will be archived and this session will be read-only.</string>
+    <string name="session_name_hint">Session Name</string>
+    <string name="create_session_from_selected_description">Create session from selected</string>
+    <string name="create_session_selected_dialog_title">Create Session from Selected</string>
+    <string name="create_session_selected_dialog_message">Enter a name for this session. The selected expenses will be archived into it and this session will be read-only.</string>
+    <string name="error_session_name_empty">Session name cannot be empty</string>
+    <string name="error_session_empty">Cannot create an empty session: there are no expenses to archive</string>
+    <string name="history_title">Session History</string>
+    <string name="no_history_found">No history found</string>
+    <string name="jornada_details_title">Session Details</string>
+    <string name="total_amount_text">Total: %1$s %2$.2f</string>
+    <string name="currency_amount_format">%1$s %2$.2f</string>
+    <string name="delete_jornada_dialog_title">Delete Session</string>
+    <string name="delete_jornada_dialog_message">Are you sure you want to delete this session? The expenses inside will NOT be deleted, but they will no longer be grouped.</string>
+    <string name="delete_jornada_success">Session deleted successfully</string>
+    <string name="delete_jornadas_dialog_title">Delete Sessions</string>
+    <string name="delete_jornadas_dialog_message">Are you sure you want to delete the selected sessions? The expenses inside will NOT be deleted, they will only stop being grouped.</string>
 
 
 </resources>

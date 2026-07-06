@@ -86,12 +86,29 @@
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp">
 
-                <LinearLayout
-                    android:id="@+id/categoryListContainer"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp" />
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/categoryListContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp" />
+
+                    <TextView
+                        android:id="@+id/tvNoStats"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="32dp"
+                        android:text="@string/no_expenses_found"
+                        android:textAlignment="center"
+                        android:textAppearance="?attr/textAppearanceSubtitle1"
+                        android:visibility="gone" />
+
+                </FrameLayout>
 
             </com.google.android.material.card.MaterialCardView>
 

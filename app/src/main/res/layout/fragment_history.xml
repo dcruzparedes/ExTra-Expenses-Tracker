@@ -8,80 +8,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="16dp">
+        android:padding="16dp">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCloseSession"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/close_session_button_text"
-            app:icon="@android:drawable/ic_menu_save" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/sortInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:hint="@string/sort_by_title_text">
-
-            <AutoCompleteTextView
-                android:id="@+id/sortAutoComplete"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/filterInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:hint="@string/filter_by_category_selection_text">
-
-            <AutoCompleteTextView
-                android:id="@+id/filterAutoComplete"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            android:text="@string/history_title"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            android:textStyle="bold" />
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvExpenses"
+                android:id="@+id/rvHistory"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:padding="8dp" />
+                android:layout_height="match_parent" />
 
             <TextView
-                android:id="@+id/tvNoExpenses"
+                android:id="@+id/tvNoHistory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="32dp"
-                android:text="@string/no_expenses_found"
-                android:textAlignment="center"
-                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:text="@string/no_history_found"
                 android:visibility="gone" />
-
         </FrameLayout>
-
     </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
@@ -129,23 +83,6 @@
                 android:textAppearance="?attr/textAppearanceSubtitle2" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnCreateSessionFromSelected"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:insetLeft="0dp"
-                android:insetTop="0dp"
-                android:insetRight="0dp"
-                android:insetBottom="0dp"
-                android:padding="0dp"
-                android:contentDescription="@string/create_session_from_selected_description"
-                app:icon="@android:drawable/ic_menu_save"
-                app:iconGravity="textStart"
-                app:iconPadding="0dp"
-                app:iconSize="24dp"
-                app:iconTint="?attr/colorPrimary" />
-
-            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDeleteSelected"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="40dp"
@@ -165,14 +102,5 @@
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:contentDescription="@string/add_expense_floatingbutton_description_text"
-        app:srcCompat="@android:drawable/ic_input_add" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

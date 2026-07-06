@@ -118,6 +118,9 @@ class StatsFragment : Fragment() {
             cat to (categoryTotals[cat.id] ?: 0.0)
         }.filter { it.second > 0 }.sortedByDescending { it.second }
 
+        binding.tvNoStats.visibility = if (sortedCategories.isEmpty()) View.VISIBLE else View.GONE
+        binding.categoryListContainer.visibility = if (sortedCategories.isEmpty()) View.GONE else View.VISIBLE
+
         sortedCategories.forEach { (category, amount) ->
             val itemBinding = ItemCategorySummaryBinding.inflate(
                 LayoutInflater.from(requireContext()),
